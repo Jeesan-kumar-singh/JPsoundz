@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-black text-white font-sans antialiased selection:bg-brand-green selection:text-black overflow-x-hidden;
+  }
+
+  /* Custom input styling */
+  input, textarea, select {
+    @apply bg-brand-surfaceCard border border-brand-border text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all duration-300;
+  }
+
+  button {
+    @apply transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism panel styling */
+  .glassmorphic {
+    background: rgba(18, 18, 18, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Glassmorphism navbar styling */
+  .glassmorphic-navbar {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* Custom premium scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #282828;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1DB954;
+}
+
+/* Animation for music wave playing representation */
+@keyframes wave-play {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+.music-wave-bar {
+  width: 3px;
+  background-color: #1DB954;
+  border-radius: 1px;
+  animation: wave-play 1.2s ease-in-out infinite;
+}
+
+.music-wave-bar:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.music-wave-bar:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.music-wave-bar:nth-child(4) {
+  animation-delay: 0.45s;
+}
