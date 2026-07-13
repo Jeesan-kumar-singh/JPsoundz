@@ -158,9 +158,12 @@ const ArtistDashboard = () => {
           <div className="bg-brand-surfaceCard border border-brand-border rounded-2xl p-6 text-left">
             <div className="flex flex-col items-center text-center pb-6 border-b border-brand-border">
               <img
-                src={user?.profilePicture}
+                src={user?.profilePicture || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=60'}
                 alt={user?.username}
                 className="w-24 h-24 rounded-full border-2 border-brand-green/45 p-0.5 object-cover mb-4"
+                onError={(e) => {
+                  e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><rect width="150" height="150" fill="%23181818"/><circle cx="75" cy="55" r="25" fill="%23b3b3b3"/><path d="M25 120c0-25 20-40 50-40s50 15 50 40z" fill="%23b3b3b3"/></svg>';
+                }}
               />
               <h2 className="text-xl font-bold text-white">@{user?.username}</h2>
               <span className="mt-1 px-3 py-0.5 rounded-full text-[10px] uppercase font-semibold bg-brand-green/15 text-brand-green border border-brand-green/25">
@@ -324,7 +327,14 @@ const ArtistDashboard = () => {
                           onClick={() => playSong(song, songs)}
                           className="relative w-10 h-10 rounded-md overflow-hidden bg-brand-surface border border-brand-border cursor-pointer flex-shrink-0"
                         >
-                          <img src={song.coverImage} alt={song.title} className="w-full h-full object-cover" />
+                          <img 
+                            src={song.coverImage} 
+                            alt={song.title} 
+                            className="w-full h-full object-cover" 
+                            onError={(e) => {
+                              e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><rect width="300" height="300" fill="%23181818"/><circle cx="150" cy="150" r="70" fill="%231DB954" opacity="0.15"/><path d="M125 110v80l60-40z" fill="%231DB954"/></svg>';
+                            }}
+                          />
                           <div className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-all ${
                             isCurrent ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
                           }`}>

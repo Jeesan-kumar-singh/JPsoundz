@@ -36,11 +36,13 @@ app.get('/', (req, res) => {
 import authRoutes from './routes/authRoutes.js';
 import songRoutes from './routes/songRoutes.js';
 import collabRoutes from './routes/collabRoutes.js';
+import checkoutRoutes from './routes/checkoutRoutes.js';
 
 // Register Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/songs', songRoutes);
 app.use('/api/collabs', collabRoutes);
+app.use('/api/checkout', checkoutRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
@@ -134,6 +136,7 @@ const seedDatabase = async () => {
         const helixIndex = (i % 16) + 1;
         const audioUrl = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${helixIndex}.mp3`;
         const plays = Math.floor(Math.abs(Math.sin(i) * 9800)) + 50;
+        const price = i % 2 === 0 ? 9.99 : 14.99;
         
         const dateOffset = i * 4 * 3600000;
         
@@ -142,6 +145,7 @@ const seedDatabase = async () => {
           artist: artist._id,
           genre,
           plays,
+          price,
           coverImage,
           audioUrl,
           createdAt: new Date(Date.now() - dateOffset)

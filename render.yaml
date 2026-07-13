@@ -1,0 +1,44 @@
+services:
+  # 1. Express Backend Web Service
+  - type: web
+    name: jpsoundz-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm.cmd install || npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        value: mongodb+srv://jpsoundz_placeholder # Fallbacks to mockStore if connection fails
+      - key: JWT_SECRET
+        value: jpsoundz_super_secret_ai_music_platform_key_2026
+      - key: STRIPE_TEST_PUBLIC_KEY
+        value: pk_test_placeholder_key
+      - key: STRIPE_TEST_SECRET_KEY
+        value: sk_test_placeholder_key
+
+  # 2. React (Vite) Frontend Static Host
+  - type: web
+    name: jpsoundz-frontend
+    env: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm.cmd install && npm.cmd run build || npm install && npm run build
+    publishDir: dist
+    headers:
+      - path: /*
+        headers:
+          - key: Cache-Control
+            value: public, max-age=31536000, immutable
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: jpsoundz-backend
+          type: web
+          property: host

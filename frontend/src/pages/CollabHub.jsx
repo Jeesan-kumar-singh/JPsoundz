@@ -248,7 +248,10 @@ const CollabHub = () => {
                     <img
                       src={post.author?.profilePicture || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=60'}
                       alt={post.author?.username}
-                      className="w-9 h-9 rounded-full border border-brand-border"
+                      className="w-9 h-9 rounded-full border border-brand-border object-cover"
+                      onError={(e) => {
+                        e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><rect width="150" height="150" fill="%23181818"/><circle cx="75" cy="55" r="25" fill="%23b3b3b3"/><path d="M25 120c0-25 20-40 50-40s50 15 50 40z" fill="%23b3b3b3"/></svg>';
+                      }}
                     />
                     <div className="text-left">
                       <div className="text-sm font-semibold text-white">@{post.author?.username || 'Unknown'}</div>

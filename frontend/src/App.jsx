@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // Context & Styling
 import { AudioProvider } from './context/AudioContext';
+import { CartProvider } from './context/CartContext';
 import './App.css';
 
 // Components
@@ -16,6 +17,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CollabHub from './pages/CollabHub';
 import ArtistDashboard from './pages/ArtistDashboard';
+import CheckoutSuccess from './pages/CheckoutSuccess';
 
 // Set up Axios configuration
 const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -47,26 +49,29 @@ function App() {
 
   return (
     <AudioProvider>
-      <Router>
-        <div className="min-h-screen bg-brand-black flex flex-col">
-          {/* Main Navigation Header */}
-          <Navbar />
+      <CartProvider>
+        <Router>
+          <div className="min-h-screen bg-brand-black flex flex-col">
+            {/* Main Navigation Header */}
+            <Navbar />
 
-          {/* Main App Page View Container */}
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Explore />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/collabs" element={<CollabHub />} />
-              <Route path="/dashboard" element={<ArtistDashboard />} />
-            </Routes>
-          </main>
+            {/* Main App Page View Container */}
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Explore />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/collabs" element={<CollabHub />} />
+                <Route path="/dashboard" element={<ArtistDashboard />} />
+                <Route path="/checkout/success" element={<CheckoutSuccess />} />
+              </Routes>
+            </main>
 
-          {/* Persistent Bottom Music Player */}
-          <BottomPlayer />
-        </div>
-      </Router>
+            {/* Persistent Bottom Music Player */}
+            <BottomPlayer />
+          </div>
+        </Router>
+      </CartProvider>
     </AudioProvider>
   );
 }

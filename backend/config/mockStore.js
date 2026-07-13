@@ -47,6 +47,9 @@ const generateMockSongs = (artistsList, count = 100) => {
     // Play counts
     const plays = Math.floor(Math.abs(Math.sin(i) * 9800)) + 50;
     
+    // Song price
+    const price = i % 2 === 0 ? 9.99 : 14.99;
+    
     // Stagger dates in past to sort releasing dates
     const dateOffset = i * 4 * 3600000; // 4 hours difference each
     
@@ -60,6 +63,7 @@ const generateMockSongs = (artistsList, count = 100) => {
       },
       genre,
       plays,
+      price,
       coverImage,
       audioUrl,
       createdAt: new Date(Date.now() - dateOffset).toISOString()

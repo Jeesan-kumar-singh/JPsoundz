@@ -59,7 +59,10 @@ const BottomPlayer = () => {
           <img
             src={currentSong.coverImage}
             alt={currentSong.title}
-            className="w-12 h-12 rounded-lg object-cover border border-brand-border shadow-glow-green/10"
+            className="w-12 h-12 rounded-lg object-cover border border-brand-border shadow-glow-green/10 flex-shrink-0"
+            onError={(e) => {
+              e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><rect width="300" height="300" fill="%23181818"/><circle cx="150" cy="150" r="70" fill="%231DB954" opacity="0.15"/><path d="M125 110v80l60-40z" fill="%231DB954"/></svg>';
+            }}
           />
           <div className="text-left truncate">
             <h4 className="text-sm font-semibold text-white truncate hover:text-brand-green cursor-pointer">

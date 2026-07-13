@@ -28,6 +28,10 @@ const songSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    price: {
+      type: Number,
+      default: 9.99,
+    },
   },
   {
     timestamps: true,
